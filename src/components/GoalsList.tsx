@@ -28,7 +28,7 @@ export const GoalsList: FC<Props> = ({ goals }) => (
         key={id}
         className={cx(
           'grid grid-cols-12 gap-2 p-1 rounded-md',
-          index % 2 ? 'bg-sky-900/50' : 'bg-sky-950/50'
+          index % 2 ? 'bg-sky-900/50' : 'bg-sky-950/50',
         )}
       >
         <div className="col-span-8 py-2 pl-6">{title}</div>

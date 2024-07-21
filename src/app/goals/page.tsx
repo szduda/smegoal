@@ -2,7 +2,7 @@ import { Button } from '@/components/Button'
 import { GoalsResponse } from '../api/goals/route'
 import { GoalsList } from '@/components/GoalsList'
 
-export const GoalsPage = async () => {
+export default async function GoalsPage() {
   const { goals }: GoalsResponse = await (
     await fetch(`${process.env.BASE_URL}/api/goals`)
   ).json()
@@ -23,5 +23,3 @@ export const GoalsPage = async () => {
     </main>
   )
 }
-
-export default GoalsPage

@@ -29,9 +29,11 @@ export const Button: FC<Props> = ({
         variant === 'red' && 'border-red-700 text-red-400 hover:bg-red-950',
         variant === 'yellow' &&
           'border-yellow-700 text-yellow-400 hover:bg-yellow-950',
-        variant === 'link' ? 'hover:underline' : 'border-2 uppercase min-w-[320px]',
+        variant === 'link'
+          ? 'hover:underline'
+          : 'border-2 uppercase min-w-[320px]',
         buttonProps?.className,
-        !href && className
+        !href && className,
       )}
     >
       {children}

@@ -2,7 +2,7 @@ import { Button } from '@/components/Button'
 import { ActionsResponse } from '../api/actions/route'
 import { ActionsList } from '@/components/ActionsList'
 
-export const ActionsPage = async () => {
+export default async function ActionsPage() {
   const { actions }: ActionsResponse = await (
     await fetch(`${process.env.BASE_URL}/api/actions`)
   ).json()
@@ -23,5 +23,3 @@ export const ActionsPage = async () => {
     </main>
   )
 }
-
-export default ActionsPage

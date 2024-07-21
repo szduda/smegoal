@@ -26,7 +26,7 @@ export const ActionsList: FC<Props> = ({ actions }) => {
                   key={id + index}
                   className={cx(
                     'grid grid-cols-12 gap-2 p-1 rounded-md',
-                    index % 2 ? 'bg-yellow-900/50' : 'bg-yellow-950/50'
+                    index % 2 ? 'bg-yellow-900/50' : 'bg-yellow-950/50',
                   )}
                 >
                   <div className="col-span-2 py-2 pl-6 flex items-center">
