@@ -1,39 +1,17 @@
 import { Action } from '@/models/Action'
+import { sql } from '@vercel/postgres'
+import { NextRequest } from 'next/server'
+import { randomUUID } from 'crypto'
 
-const locale = 'pl'
+export async function POST(req: NextRequest) {
+  const { title, timestamp }: Action = await req.json()
+  const id = randomUUID()
 
-export type ActionsResponse = {
-  actions: Action[]
-}
-
-export async function GET() {
-  // const res = await fetch('', {
-  //   headers: {
-  //     'Content-Type': 'application/json',
-  //     'API-Key': process.env.DATA_API_KEY,
-  //   },
-  // })
-  // const data = await res.json()
-  const actions = [
-    { id: '3dj30', title: 'Phycisal excercises', timestamp: 20347239487 },
-    {
-      id: '1230',
-      title:
-        'Test some longer title and see how it wraps, probably add ellipsis at the end. Or maybe not, maybe wrapping is fine.',
-      timestamp: 20345139487,
-    },
-    { id: '4jG0C', title: 'Djembe practice', timestamp: 190235108237 },
-    { id: 'Zz2b6', title: 'Kitty grooming', timestamp: 190228108237 },
-    {
-      id: 'dOJ85',
-      title: 'Visit Guinee or Senegambia',
-      timestamp: 190218438237,
-    },
-  ].map((action) => ({
-    ...action,
-    date: new Date(action.timestamp).toLocaleDateString(locale),
-    time: new Date(action.timestamp).toLocaleTimeString(locale),
-  }))
-
-  return Response.json({ actions })
+  try {
+    sql`INSERT INTO actions VALUES (${id}, ${title}, ${timestamp}, ${Date.now()})`
+    return Response.json({ id })
+  } catch (error) {
+    console.error('DB Error:', error)
+    return new Response(JSON.stringify({ error: 'DB Error' }), { status: 500 })
+  }
 }

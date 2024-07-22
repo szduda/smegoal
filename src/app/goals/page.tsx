@@ -1,16 +1,20 @@
 import { Button } from '@/components/Button'
-// import { GoalsResponse } from '../api/goals/route'
 import { GoalsList } from '@/components/GoalsList'
+import { Goal } from '@/models/Goal'
+import { sql } from '@vercel/postgres'
+
+const locale = 'pl'
 
 export default async function GoalsPage() {
-  // const { goals }: GoalsResponse = await (
-  //   await fetch(`${process.env.BASE_URL}/api/goals`)
-  // ).json()
-
-  // console.log('fetch goals', goals)
-
-  const goals: any = []
-
+  const { rows } =
+    await sql`SELECT * FROM goals ORDER BY createdAt desc LIMIT 50;`
+  const goals: Goal[] = rows.map((dbGoal) => ({
+    id: dbGoal.id,
+    title: dbGoal.title,
+    times: Number(dbGoal.times),
+    per: dbGoal.per,
+    createdAt: new Date(Number(dbGoal.createdat)).toLocaleDateString(locale),
+  }))
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-4 pt-[calc(44px+1rem)] lg:p-24">

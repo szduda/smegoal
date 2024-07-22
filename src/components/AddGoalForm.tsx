@@ -7,21 +7,34 @@ import { Select } from '@/components/Select'
 import { PERS } from '@/models/Goal'
 
 export const AddGoalForm = () => {
-  const [status, setStatus] = useState<'' | 'success'>('')
+  const [status, setStatus] = useState('')
   const [title, setTitle] = useState('')
-  const [times, setTimes] = useState('')
+  const [times, setTimes] = useState('1')
   const [per, setPer] = useState('lifetime')
 
-  const submit = (e: FormEvent<HTMLFormElement>) => {
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const data = {
       title,
-      times,
+      times: Number.parseInt(times),
       per,
     }
 
-    setStatus('success')
-    console.log('goal submit', data)
+    console.debug('goal submitting', data)
+
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/goals`, {
+      method: 'POST',
+      body: JSON.stringify(data),
+    })
+
+    if (res.ok) {
+      const { id } = await res.json()
+      setStatus('success')
+      console.debug('goal submitted', id)
+    } else {
+      setStatus(`Error ${res.status}`)
+      console.debug('goal not submitted')
+    }
   }
 
   const reset = () => {

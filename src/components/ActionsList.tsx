@@ -15,7 +15,7 @@ export const ActionsList: FC<Props> = ({ actions }) => {
     <div className="flex flex-col justify-center gap-6 max-w-3xl">
       {groups.map((group) => (
         <div key={group} className="flex flex-col gap-2">
-          <h2 className="text-xl font-bold tracking-widest">
+          <h2 className="text-xl font-bold tracking-widest text-white/50">
             {group.substring(0, 5)}
           </h2>
           <div className="flex flex-1 flex-col items-between justify-center gap-2">
@@ -26,13 +26,13 @@ export const ActionsList: FC<Props> = ({ actions }) => {
                   key={id + index}
                   className={cx(
                     'grid grid-cols-12 gap-2 p-1 rounded-md',
-                    index % 2 ? 'bg-yellow-900/50' : 'bg-yellow-950/50',
+                    index % 2 ? 'bg-yellow-900/50' : 'bg-yellow-950/50'
                   )}
                 >
-                  <div className="col-span-2 py-2 pl-6 flex items-center">
+                  <div className="col-span-2 py-2 pl-6 flex items-center text-white/75">
                     {time.substring(0, 5)}
                   </div>
-                  <div className="col-span-9 py-2">{title}</div>
+                  <div className="col-span-9 py-2 text-white/75">{title}</div>
                   <div className="flex items-center justify-end pr-2">
                     <button
                       className="p-2 opacity-25 h-min rounded-full hover:opacity-100 hover:bg-yellow-500/50"

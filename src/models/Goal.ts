@@ -14,4 +14,5 @@ export type Goal = {
   title: string
   times: number
   per: PerPeriod
+  createdAt: string
 }

@@ -4,4 +4,5 @@ export type Action = {
   timestamp: number
   date: string
   time: string
+  createdAt: string
 }
