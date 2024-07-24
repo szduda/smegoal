@@ -3,15 +3,15 @@ import Link from 'next/link'
 import { ComponentProps, FC, ReactNode } from 'react'
 
 type Props = {
-  children: ReactNode
   href?: ComponentProps<typeof Link>['href']
-  variant?: 'blue' | 'green' | 'gray' | 'red' | 'yellow' | 'link'
-  buttonProps?: Omit<ComponentProps<'button'>, 'children'>
+  variant?: 'clean' | 'blue' | 'green' | 'gray' | 'red' | 'yellow' | 'link'
+  buttonProps?: Omit<ComponentProps<'button'>, 'children' | 'onClick'>
   className?: string
-}
+} & Pick<ComponentProps<'button'>, 'children' | 'onClick'>
 
 export const Button: FC<Props> = ({
   children,
+  onClick,
   href,
   variant = 'gray',
   buttonProps,
@@ -19,9 +19,11 @@ export const Button: FC<Props> = ({
 }) => {
   const button = (
     <button
+      type="button"
+      onClick={onClick}
       {...buttonProps}
       className={cx(
-        'px-4 py-2 font-medium rounded-md tracking-wider',
+        'font-medium tracking-wider',
         variant === 'blue' && 'border-sky-700 text-sky-400 hover:bg-sky-950',
         variant === 'green' &&
           'border-green-700 text-green-400 hover:bg-green-950',
@@ -29,11 +31,11 @@ export const Button: FC<Props> = ({
         variant === 'red' && 'border-red-700 text-red-400 hover:bg-red-950',
         variant === 'yellow' &&
           'border-yellow-700 text-yellow-400 hover:bg-yellow-950',
-        variant === 'link'
-          ? 'hover:underline'
-          : 'border-2 uppercase min-w-[320px]',
+        variant === 'link' && 'hover:underline px-2',
+        !['clean', 'link'].includes(variant) &&
+          'border-2 uppercase min-w-[320px] py-2 px-4 rounded-md',
         buttonProps?.className,
-        !href && className,
+        !href && className
       )}
     >
       {children}

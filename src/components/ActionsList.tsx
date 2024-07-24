@@ -16,12 +16,12 @@ export const ActionsList: FC<Props> = ({ actions }) => {
       {groups.map((group) => (
         <div key={group} className="flex flex-col gap-2">
           <h2 className="text-xl font-bold tracking-widest text-white/50">
-            {group.substring(0, 5)}
+            {group.substring(0, group.lastIndexOf('.'))}
           </h2>
           <div className="flex flex-1 flex-col items-between justify-center gap-2">
             {actions
               ?.filter((a) => a.date === group)
-              .map(({ id, title, time }, index) => (
+              .map(({ id, title, time, time2, date, date2, goals }, index) => (
                 <div
                   key={id + index}
                   className={cx(
@@ -29,10 +29,27 @@ export const ActionsList: FC<Props> = ({ actions }) => {
                     index % 2 ? 'bg-yellow-900/50' : 'bg-yellow-950/50'
                   )}
                 >
-                  <div className="col-span-2 py-2 pl-6 flex items-center text-white/75">
-                    {time.substring(0, 5)}
+                  <div className="col-span-3 py-2 pl-4 flex items-center text-sm text-white/50">
+                    {time.substring(0, time.lastIndexOf(':'))}
+                    {time2
+                      ? ` - ${`${
+                          date2 && date2 !== date
+                            ? date2.substring(0, date2.lastIndexOf('.'))
+                            : ''
+                        } `}${time.substring(0, time.lastIndexOf(':'))}`
+                      : ''}
                   </div>
-                  <div className="col-span-9 py-2 text-white/75">{title}</div>
+                  <div className="col-span-6 py-2 text-white/75">{title}</div>
+                  <div className="col-span-2 py-2 text-white/75 flex flex-wrap gap-1 items-center">
+                    {goals?.map((g) => (
+                      <div
+                        key={g.codename}
+                        className="px-2 rounded-full bg-sky-700/75 h-min"
+                      >
+                        {g.codename}
+                      </div>
+                    ))}
+                  </div>
                   <div className="flex items-center justify-end pr-2">
                     <button
                       className="p-2 opacity-25 h-min rounded-full hover:opacity-100 hover:bg-yellow-500/50"

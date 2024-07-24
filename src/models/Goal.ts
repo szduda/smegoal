@@ -11,8 +11,9 @@ export type PerPeriod = keyof typeof PERS
 
 export type Goal = {
   id: string
-  title: string
-  times: number
-  per: PerPeriod
-  createdAt: string
+  title?: string
+  codename: string
+  times?: number
+  per?: PerPeriod
+  createdAt?: string
 }

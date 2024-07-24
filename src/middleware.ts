@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 
 const [AUTH_USER, AUTH_PASS] = (process.env.HTTP_BASIC_AUTH || ':').split(':')
 
-// Step 1. HTTP Basic Auth Middleware for Challenge
+// TODO: setup cookie-token-based auth
 export function middleware(req: NextRequest) {
   if (!isAuthenticated(req)) {
     return new NextResponse('Smegoal does not like guests.', {
@@ -34,8 +34,6 @@ const isAuthenticated = (req: NextRequest) => {
     .split(':')
 
   const credentialsCorrect = user == AUTH_USER && pass == AUTH_PASS
-  console.log(
-    `Auth: credentials ${credentialsCorrect ? 'correct' : 'incorrect'}.`
-  )
+
   return credentialsCorrect
 }

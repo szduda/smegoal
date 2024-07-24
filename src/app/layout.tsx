@@ -21,31 +21,31 @@ export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body className={cx(inter.className, 'bg-black')}>
-        <header className="bg-gray-900 flex justify-between items-center fixed top-0 w-full">
+        <header className="bg-[#202020] flex justify-between items-center fixed top-0 w-full">
           <div className="flex-1">
             <Button
               variant="link"
               href="/goals"
-              className="text-sky-400 hover:text-sky-500 lg:hidden"
+              className=" py-2 text-sky-400 hover:text-sky-500 lg:hidden"
             >
               Goals
             </Button>
           </div>
           <Link href="/">
-            <h1 className="text-xl font-bold tracking-widest p-2">Smegoal</h1>
+            <h1 className="text-xl font-bold tracking-widest p-1">Smegoal</h1>
           </Link>
-          <div className="flex flex-1 justify-end">
+          <div className="flex flex-1 justify-end gap-2 pr-4">
             <Button
               variant="link"
               href="/goals"
-              className="text-sky-400 hover:text-sky-500 hidden lg:block"
+              className="py-2 text-sky-400 hover:text-sky-500 hidden lg:block"
             >
               Goals
             </Button>
             <Button
               variant="link"
               href="/actions"
-              className="text-yellow-300 hover:text-yellow-400"
+              className="py-2 text-yellow-300 hover:text-yellow-400"
             >
               Actions
             </Button>
